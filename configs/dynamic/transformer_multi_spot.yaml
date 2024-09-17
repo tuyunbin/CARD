@@ -1,0 +1,45 @@
+exp_name: 'card_spot'
+gpu_id: [0]
+logger:
+    display_id: 9908
+model:
+    transformer_encoder:
+        input_dim: 2048
+        feat_dim: 1024
+        emb_dim: 512
+        att_dim: 512
+        att_head: 8
+        att_layer: 2
+        dim: 128
+    transformer_decoder:
+        input_dim: 2048
+        word_dim: 300
+        att_dim: 512
+        att_head: 8
+        att_layer: 2
+        vocab_size: 2033 #743 #2059
+        seq_length: 70
+        share_wd_cls_weight: False
+        label_smoothing: 0.0
+
+data:
+    dataset: 'rcc_dataset_transformer_spot'
+    default_feature_dir: "./spot-the-diff/features"
+    semantic_feature_dir: "./spot-the-diff/sc_features"
+    default_img_dir: "./spot-the-diff/images"
+    semantic_img_dir: "./spot-the-diff/sc_images"
+    splits_json: "./spot-the-diff/splits.json"
+    vocab_json: "./spot-the-diff/transformer_multi_vocab.json"
+    h5_label_file: "./spot-the-diff/transformer_multi_labels.h5"
+    train:
+        batch_size: 32
+train:
+    max_iter: 10000
+    snapshot_interval: 1000
+    grad_clip: -1.0
+    optim:
+        type: 'adam'
+        lr: 0.0002
+        weight_decay: 0.0
+        step_size: 17 # 17
+        gamma: 0.1  #0.3
