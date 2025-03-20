@@ -16,7 +16,7 @@ Tu, Yunbin, et al. ["Context-aware Difference Distilling for Multi-change Captio
 
 Extracting this file will create `spot-the-diff` directory. 
 You need to split them as bef-change images and aft-change images, and put two kinds of images into two directories, namely `images` and `sc_images`. 
-I have already uploaded my preprocessed images into the baidu driver [spot-the-diff-imgs.zip](https://pan.baidu.com/s/1KZqibrHe3bT1MBMFi5iG5w), where the extraction code is `spot`.
+I have already uploaded my preprocessed images into the baidu drive [spot-the-diff-imgs.zip](https://pan.baidu.com/s/1KZqibrHe3bT1MBMFi5iG5w), where the extraction code is `spot`.
 
 2. Preprocess data
 
@@ -35,7 +35,7 @@ python scripts/extract_features.py --input_image_dir ./spot-the-diff/sc_images -
 python scripts/preprocess_captions_multi_spot.py
 ```
 
-## Training
+## Training (using an RTX 3090 GPU in my implementation)
 To train the proposed method, run the following commands:
 ```
 # create a directory or a symlink to save the experiments logs/snapshots etc.
@@ -72,11 +72,13 @@ After the format is ready, run the following command to run evaluation:
 python evaluate_spot.py --results_dir ./experiments/card_spot/eval_sents --anno ./spot-the-diff/change_multi_captions_reformat.json 
 ```
 
-Once the best model is found on the validation set, you can run inference on test set:
+Once the best model (8000th iteration in my implementation) is found on the validation set, you can run inference on test set:
 ```
 python evaluate_spot.py --results_dir ./experiments/card_spot/test_output/captions --anno ./spot-the-diff/change_multi_captions_reformat.json 
 ```
-The results are saved in `./experiments/card_spot/test_output/captions/eval_results.txt`
+The results are saved in `./experiments/card_spot/test_output/captions/eval_results.txt`. I have uploaded the best model's checkpoint (8000th iteration)  into the baidu drive [checkpoint](https://pan.baidu.com/s/1oWMjTtVmWqyXHNVVr_Abbw?pwd=spot), where the extraction code is `spot`. Since I refined the code after submitting it to ACL 2024, the results differ slightly from those reported in the paper, but the overall performance remains similar.
+
+
 
 If you find this helps your research, please consider citing:
 ```
